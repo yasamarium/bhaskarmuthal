@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bhaskar - The Undisputed Muthal Chronicles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --card-bg: #0f141f;
+      --card-hover: #172033;
+      --border: #1e293b;
+      --border-glow: #38bdf8;
+      --primary: #f59e0b;
+      --primary-glow: rgba(245, 158, 11, 0.25);
+      --accent: #06b6d4;
+      --accent-glow: rgba(6, 182, 212, 0.25);
+      --danger: #ef4444;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --font-display: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-display);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(245, 158, 11, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 85% 60%, rgba(6, 182, 212, 0.06) 0%, transparent 45%),
+        linear-gradient(rgba(30, 41, 59, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(30, 41, 59, 0.15) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+    }
+
+    /* TOP NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 14, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      letter-spacing: 1px;
+      font-size: 16px;
+      color: var(--primary);
+    }
+
+    .brand-tag {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid var(--primary);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      color: var(--primary);
+    }
+
+    .status-live {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--danger);
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .dot-pulse {
+      width: 8px;
+      height: 8px;
+      background: var(--danger);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--danger);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.8); }
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+      position: relative;
+    }
+
+    .badge-pill {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      padding: 6px 16px;
+      border-radius: 30px;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-size: clamp(38px, 6vw, 68px);
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.08;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 30%, var(--primary) 70%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(16px, 2.2vw, 20px);
+      color: var(--text-muted);
+      max-width: 760px;
+      margin: 0 auto 36px;
+    }
+
+    /* STATS STRIP */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 50px;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 18px;
+      text-align: center;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      opacity: 0.5;
+    }
+
+    .stat-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+
+    /* NAVIGATION TABS */
+    .nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 40px;
+      padding: 6px;
+      background: rgba(15, 20, 31, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .nav-tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-tab-btn:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-tab-btn.active {
+      color: var(--bg);
+      background: var(--primary);
+      box-shadow: 0 0 16px var(--primary-glow);
+    }
+
+    /* CONTENT TABS */
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.35s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-header {
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .section-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent);
+    }
+
+    /* CARD STYLES */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 20px;
+      transition: border-color 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+
+    /* LORE TIMELINE */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 20px;
+      padding: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .timeline-era {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--accent);
+      border-right: 2px solid var(--border);
+      padding-right: 14px;
+    }
+
+    .timeline-body h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+
+    .timeline-body p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* SCHEDULE / ROUTINE */
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .schedule-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .schedule-time {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--primary);
+      background: rgba(245, 158, 11, 0.1);
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      align-self: flex-start;
+    }
+
+    .schedule-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .schedule-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* COMMANDMENTS */
+    .commandments-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+    }
+
+    .commandment-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .cmd-num {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+      background: rgba(245, 158, 11, 0.1);
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      border: 1px solid var(--primary);
+      flex-shrink: 0;
+    }
+
+    .cmd-content h4 {
+      font-size: 16px;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .cmd-content p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* GUINNESS RECORDS */
+    .records-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    .records-table th, .records-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .records-table th {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      background: rgba(6, 182, 212, 0.05);
+    }
+
+    .records-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .record-val {
+      font-family: var(--font-mono);
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    /* MUTH-O-METER INTERACTIVE GAME */
+    .meter-container {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 18px;
+      padding: 32px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .meter-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+
+    .meter-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .meter-display {
+      background: #000;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+    }
+
+    .meter-box-num {
+      font-family: var(--font-mono);
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .meter-box-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+
+    .meter-rank {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary);
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid var(--primary);
+      padding: 8px 16px;
+      border-radius: 8px;
+      display: inline-block;
+      margin-bottom: 24px;
+    }
+
+    .meter-progress-track {
+      width: 100%;
+      height: 14px;
+      background: #1e293b;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .meter-progress-fill {
+      height: 100%;
+      width: 5%;
+      background: linear-gradient(90deg, var(--accent), var(--primary), var(--danger));
+      transition: width 0.15s ease;
+      box-shadow: 0 0 10px var(--primary);
+    }
+
+    .click-target-btn {
+      background: linear-gradient(135deg, var(--primary), #d97706);
+      color: #000;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 900;
+      padding: 20px 48px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 8px 24px var(--primary-glow);
+      transition: all 0.1s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .click-target-btn:active {
+      transform: scale(0.94);
+      box-shadow: 0 2px 10px var(--primary-glow);
+    }
+
+    .game-controls {
+      margin-top: 18px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text);
+      color: var(--text);
+    }
+
+    /* ROAST & EXCUSE GENERATOR */
+    .generator-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .gen-output {
+      min-height: 90px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 15px;
+      color: var(--primary);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .gen-btn {
+      background: var(--accent);
+      color: #000;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 15px;
+      padding: 12px 28px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .gen-btn:hover {
+      box-shadow: 0 0 20px var(--accent-glow);
+      transform: translateY(-2px);
+    }
+
+    /* BADGES & TROPHIES */
+    .badge-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .trophy-badge {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+    }
+
+    .badge-tag-top {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary);
+    }
+
+    .badge-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .badge-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 20px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    @media (max-width: 680px) {
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+      .timeline-era {
+        border-right: none;
+        border-bottom: 2px solid var(--border);
+        padding-bottom: 6px;
+      }
+      .commandment-card {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header>
+    <div class="brand">
+      <span>BHASKAR</span>
+      <span class="brand-tag">MUTHAL_HQ // V2.0</span>
+    </div>
+    <div class="status-live">
+      <div class="dot-pulse"></div>
+      <span>INCOGNITO ACTIVE</span>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="badge-pill">[VERIFIED GUINNESS CONTENDER]</div>
+      <h1 class="hero-title">BHASKAR THE MUTHAL</h1>
+      <p class="hero-subtitle">
+        Supreme Commander of the Private Tab. 4G Night-Pack Devourer. 
+        Legendary pioneer of the 3-second emergency window reflex. 
+        Documenting the sacred journey of hand speed, perseverance, and midnight determination.
+      </p>
+    </section>
+
+    <!-- KEY METRICS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">34,912</div>
+        <div class="stat-label">Sessions Completed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">1,420</div>
+        <div class="stat-label">Tissue Boxes Sacrificed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">0.04 ms</div>
+        <div class="stat-label">Alt+Tab Reflex Speed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">0.00 sec</div>
+        <div class="stat-label">Next-Day Eye Contact</div>
+      </div>
+    </div>
+
+    <!-- TABS NAVIGATION -->
+    <div class="nav-tabs">
+      <button class="nav-tab-btn active" onclick="switchTab('lore', this)">[THE LORE]</button>
+      <button class="nav-tab-btn" onclick="switchTab('schedule', this)">[DAILY ROUTINE]</button>
+      <button class="nav-tab-btn" onclick="switchTab('commandments', this)">[COMMANDMENTS]</button>
+      <button class="nav-tab-btn" onclick="switchTab('records', this)">[GUINNESS RECORDS]</button>
+      <button class="nav-tab-btn" onclick="switchTab('game', this)">[MUTH-O-METER GAME]</button>
+      <button class="nav-tab-btn" onclick="switchTab('generator', this)">[EXCUSE & WISDOM]</button>
+      <button class="nav-tab-btn" onclick="switchTab('trophies', this)">[HALL OF FAME]</button>
+    </div>
+
+    <!-- TAB 1: THE LORE -->
+    <div id="tab-lore" class="tab-content active">
+      <div class="section-header">
+        <h2 class="section-title">The Chronicles of Bhaskar</h2>
+        <span class="section-tag">ARCHIVE CLASSIFIED</span>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-era">PHASE 01<br>AGE 13</div>
+          <div class="timeline-body">
+            <h3>The Discovery of Stealth Mode</h3>
+            <p>
+              It was a rainy monsoon night when young Bhaskar pressed Ctrl+Shift+N for the first time. 
+              The dark grey window appeared like a portal to another universe. 
+              While ordinary kids were studying algebra, Bhaskar was mastering the art of the silent grip. 
+              The journey of the greatest muthal in regional history had begun.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-era">PHASE 02<br>AGE 17</div>
+          <div class="timeline-body">
+            <h3>The 4G Night Data Era</h3>
+            <p>
+              When telecom providers announced free data between 12:00 AM and 6:00 AM, 
+              they did not anticipate Bhaskar. He consumed 180 GB in four nights. 
+              Local cell towers reported localized overheating. 
+              His right forearm grew twice the density of his left forearm. 
+              Neighbours wondered why his bedroom lamp flickered till dawn.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-era">PHASE 03<br>AGE 21</div>
+          <div class="timeline-body">
+            <h3>The Bluetooth Incident of 2022</h3>
+            <p>
+              A near-fatal catastrophe occurred when Bhaskar forgot to verify his phone audio output. 
+              The audio briefly connected to his father's Bluetooth soundbar in the living room for 1.8 seconds. 
+              Bhaskar executed a 0.02 second power plug unplug, blamed the neighbour's hacked WiFi, 
+              and delivered a PowerPoint presentation on cybersecurity to divert family suspicion.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-era">PHASE 04<br>PRESENT</div>
+          <div class="timeline-body">
+            <h3>The Undisputed Grandmaster</h3>
+            <p>
+              Today, Bhaskar holds international underground acclaim. 
+              He can operate with one eye asleep, ears detecting footsteps from 40 meters away, 
+              and wrist durability that defies orthopaedic science. 
+              He is not just a muthal; he is an institution.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: DAILY ROUTINE -->
+    <div id="tab-schedule" class="tab-content">
+      <div class="section-header">
+        <h2 class="section-title">A Day in the Life of Bhaskar</h2>
+        <span class="section-tag">24-HOUR MILITARY PRECISION</span>
+      </div>
+      <div class="schedule-grid">
+        <div class="schedule-item">
+          <span class="schedule-time">01:30 AM</span>
+          <div class="schedule-title">Perimeter Security Sweep</div>
+          <div class="schedule-desc">
+            Double checks door latch. Verifies phone volume is at absolute zero. 
+            Disconnects all Bluetooth devices. Dims screen brightness to 8%.
+          </div>
+        </div>
+        <div class="schedule-item">
+          <span class="schedule-time">02:00 AM</span>
+          <div class="schedule-title">Prime Operating Hours</div>
+          <div class="schedule-desc">
+            Opens 42 incognito tabs across 3 browsers. Right hand enters combat readiness. 
+            Heart rate reaches 140 BPM in pure tactical focus.
+          </div>
+        </div>
+        <div class="schedule-item">
+          <span class="schedule-time">04:15 AM</span>
+          <div class="schedule-title">Post-Nut Clarity Crisis</div>
+          <div class="schedule-desc">
+            Closes all tabs instantly. Stares at the ceiling in complete spiritual paralysis. 
+            Contemplates starting an organic goat farm or becoming a monk.
+          </div>
+        </div>
+        <div class="schedule-item">
+          <span class="schedule-time">11:45 AM</span>
+          <div class="schedule-title">The Zombie Awakening</div>
+          <div class="schedule-desc">
+            Wakes up dehydrated with dark circles deeper than the Mariana Trench. 
+            Avoids all eye contact with family members at breakfast.
+          </div>
+        </div>
+        <div class="schedule-item">
+          <span class="schedule-time">04:00 PM</span>
+          <div class="schedule-title">Supply Logistics Run</div>
+          <div class="schedule-desc">
+            Visits local convenience store to buy almond oil, moisturisers, and 2-ply tissues. 
+            Tells the shopkeeper it is for dry winter skin.
+          </div>
+        </div>
+        <div class="schedule-item">
+          <span class="schedule-time">11:59 PM</span>
+          <div class="schedule-title">The Cycle Resumes</div>
+          <div class="schedule-desc">
+            Tells everyone 'Good night, I am sleeping early today to fix my sleep cycle.' 
+            Immediately boots up incognito mode.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: COMMANDMENTS -->
+    <div id="tab-commandments" class="tab-content">
+      <div class="section-header">
+        <h2 class="section-title">The 8 Sacred Commandments</h2>
+        <span class="section-tag">PRESERVED BY BHASKAR</span>
+      </div>
+      <div class="commandments-list">
+        <div class="commandment-card">
+          <div class="cmd-num">01</div>
+          <div class="cmd-content">
+            <h4>The Triple Audio Verification</h4>
+            <p>Never play media until you have physically checked: Media Volume, Ringtone Volume, and Bluetooth Disconnection three consecutive times.</p>
+          </div>
+        </div>
+        <div class="commandment-card">
+          <div class="cmd-num">02</div>
+          <div class="cmd-content">
+            <h4>The Decoy Tab Protocol</h4>
+            <p>Always keep a tab of Wikipedia (Quantum Physics or Indian History) open in the background for instant emergency switching.</p>
+          </div>
+        </div>
+        <div class="commandment-card">
+          <div class="cmd-num">03</div>
+          <div class="cmd-content">
+            <h4>The 3-Second Footstep Rule</h4>
+            <p>If floorboards creak within a 15-meter radius, shut the screen, pull the blanket to chin level, and fake snore immediately.</p>
+          </div>
+        </div>
+        <div class="commandment-card">
+          <div class="cmd-num">04</div>
+          <div class="cmd-content">
+            <h4>Never Trust Clear History Alone</h4>
+            <p>True veterans flush DNS cache, clear router logs, and disable auto-complete suggestions before sleeping.</p>
+          </div>
+        </div>
+        <div class="commandment-card">
+          <div class="cmd-num">05</div>
+          <div class="cmd-content">
+            <h4>Left Hand Browses, Right Hand Conquers</h4>
+            <p>Specialization is the key to longevity. Maintain strict division of labor across both arms to prevent premature wrist burnout.</p>
+          </div>
+        </div>
+        <div class="commandment-card">
+          <div class="cmd-num">06</div>
+          <div class="cmd-content">
+            <h4>Hydration Is Non-Negotiable</h4>
+            <p>A true muthal drinks 2 liters of water daily to replenish the vital electrolytes lost during intense midnight combat.</p>
+          </div>
+        </div>
+        <div class="commandment-card">
+          <div class="cmd-num">07</div>
+          <div class="cmd-content">
+            <h4>The Tissue Disposal Doctrine</h4>
+            <p>Tissues must be wrapped inside double bags and taken directly to the outdoor bin at dawn. Never leave evidence in bedroom bins.</p>
+          </div>
+        </div>
+        <div class="commandment-card">
+          <div class="cmd-num">08</div>
+          <div class="cmd-content">
+            <h4>Embrace the Clarity</h4>
+            <p>The 15 minutes of post-nut clarity are sacred. Write down your business ideas before you forget them and fall asleep.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: GUINNESS RECORDS -->
+    <div id="tab-records" class="tab-content">
+      <div class="section-header">
+        <h2 class="section-title">Official Muthal World Records</h2>
+        <span class="section-tag">VERIFIED BY UNDERGROUND COUNCIL</span>
+      </div>
+      <div class="card" style="padding: 0; overflow-x: auto;">
+        <table class="records-table">
+          <thead>
+            <tr>
+              <th>DISCIPLINE</th>
+              <th>BHASKAR RECORD</th>
+              <th>GLOBAL AVERAGE</th>
+              <th>STATUS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Longest Single Incognito Session</td>
+              <td><span class="record-val">8 Hours 42 Mins</span></td>
+              <td>24 Minutes</td>
+              <td>[ALL TIME RECORD]</td>
+            </tr>
+            <tr>
+              <td>Alt + Tab Switch Speed (Ninja Reflex)</td>
+              <td><span class="record-val">0.038 Milliseconds</span></td>
+              <td>1.20 Seconds</td>
+              <td>[UNBEATEN]</td>
+            </tr>
+            <tr>
+              <td>Simultaneous Open Browser Tabs</td>
+              <td><span class="record-val">128 Tabs (No Crash)</span></td>
+              <td>6 Tabs</td>
+              <td>[RAM DESTROYER]</td>
+            </tr>
+            <tr>
+              <td>Lifetime Tissue Consumption</td>
+              <td><span class="record-val">14,200 Boxes</span></td>
+              <td>120 Boxes</td>
+              <td>[INDUSTRIAL SCALE]</td>
+            </tr>
+            <tr>
+              <td>Maximum Daily Sessions (Peak Lockdown)</td>
+              <td><span class="record-val">11 Rounds</span></td>
+              <td>1.5 Rounds</td>
+              <td>[BIOLOGICAL ANOMALY]</td>
+            </tr>
+            <tr>
+              <td>Consecutive Days Without Clean Sheets</td>
+              <td><span class="record-val">84 Days</span></td>
+              <td>14 Days</td>
+              <td>[UNHYGIENIC CHAMPION]</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 5: MUTH-O-METER GAME -->
+    <div id="tab-game" class="tab-content">
+      <div class="section-header">
+        <h2 class="section-title">The Muth-O-Meter Mini-Game</h2>
+        <span class="section-tag">TEST YOUR FOREARM DURABILITY</span>
+      </div>
+
+      <div class="meter-container">
+        <h3 class="meter-title">Tap to Fuel Bhaskar's Wrist Power</h3>
+        <p class="meter-subtitle">Click as fast as possible to climb the Muthal Hierarchy and unlock legendary ranks.</p>
+
+        <div class="meter-display">
+          <div>
+            <div class="meter-box-num" id="clickCount">0</div>
+            <div class="meter-box-label">Total Strokes</div>
+          </div>
+          <div>
+            <div class="meter-box-num" id="rpmCount">0</div>
+            <div class="meter-box-label">Reps Per Minute (RPM)</div>
+          </div>
+          <div>
+            <div class="meter-box-num" id="energyLevel">0%</div>
+            <div class="meter-box-label">Friction Heat</div>
+          </div>
+        </div>
+
+        <div>
+          <span class="meter-rank" id="rankBadge">RANK: NOVICE AMATEUR</span>
+        </div>
+
+        <div class="meter-progress-track">
+          <div class="meter-progress-fill" id="meterFill"></div>
+        </div>
+
+        <button class="click-target-btn" id="strokeBtn" onclick="registerStroke()">
+          STROKE IT NOW!
+        </button>
+
+        <div class="game-controls">
+          <button class="btn-secondary" onclick="resetGame()">[RESET COUNTER]</button>
+          <button class="btn-secondary" onclick="toggleSound()">[SOUND: ON]</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: EXCUSE & WISDOM GENERATOR -->
+    <div id="tab-generator" class="tab-content">
+      <div class="section-header">
+        <h2 class="section-title">Bhaskar's Excuse & Clarity Generator</h2>
+        <span class="section-tag">AI-POWERED DEFENSE MECHANISMS</span>
+      </div>
+
+      <div class="generator-card">
+        <h3>Emergency Door-Knock Excuse Generator</h3>
+        <p style="color: var(--text-muted); font-size: 13px; margin: 6px 0 16px;">
+          When mom knocks at 3:15 AM and asks why the bedroom door is bolted:
+        </p>
+        <div class="gen-output" id="excuseOutput">
+          "Mom, I was doing pushups on the floor and my hand slipped into the latch!"
+        </div>
+        <button class="gen-btn" onclick="generateExcuse()">GENERATE NEW EXCUSE</button>
+      </div>
+
+      <div class="generator-card">
+        <h3>Post-Nut Clarity Wisdom Generator</h3>
+        <p style="color: var(--text-muted); font-size: 13px; margin: 6px 0 16px;">
+          Profound thoughts experienced by Bhaskar within 60 seconds of completion:
+        </p>
+        <div class="gen-output" id="wisdomOutput" style="color: var(--accent);">
+          "Why am I chasing temporary dopamine when I could master Python and build an autonomous drone company?"
+        </div>
+        <button class="gen-btn" style="background: var(--primary);" onclick="generateWisdom()">GENERATE CLARITY THOUGHT</button>
+      </div>
+    </div>
+
+    <!-- TAB 7: TROPHIES -->
+    <div id="tab-trophies" class="tab-content">
+      <div class="section-header">
+        <h2 class="section-title">The Hall of Fame Trophies</h2>
+        <span class="section-tag">LIFETIME ACHIEVEMENT RECOGNITION</span>
+      </div>
+
+      <div class="badge-grid">
+        <div class="trophy-badge">
+          <span class="badge-tag-top">[LEGENDARY TIER]</span>
+          <h3 class="badge-title">Wrist of Damascus Steel</h3>
+          <p class="badge-desc">Awarded for completing 1,000 consecutive nights without a single carpal tunnel complaint.</p>
+        </div>
+
+        <div class="trophy-badge">
+          <span class="badge-tag-top">[STEALTH TIER]</span>
+          <h3 class="badge-title">The Phantom Tabber</h3>
+          <p class="badge-desc">Successfully maintained 10 years of private browsing without leaving a single search entry in parental history.</p>
+        </div>
+
+        <div class="trophy-badge">
+          <span class="badge-tag-top">[SURVIVAL TIER]</span>
+          <h3 class="badge-title">The 0.04s Quickdraw</h3>
+          <p class="badge-desc">Switched from unmentionable Japanese animation to NCERT Chemistry Chapter 4 before the door opened.</p>
+        </div>
+
+        <div class="trophy-badge">
+          <span class="badge-tag-top">[DATA TIER]</span>
+          <h3 class="badge-title">Bandwidth Blackhole</h3>
+          <p class="badge-desc">Consistently triggered fair-usage policy alerts on three different internet service providers.</p>
+        </div>
+
+        <div class="trophy-badge">
+          <span class="badge-tag-top">[LOGISTICS TIER]</span>
+          <h3 class="badge-title">Tissue Stockpile Veteran</h3>
+          <p class="badge-desc">Maintained a strategic underground reserve of 50+ rolls of toilet paper under his bed frame.</p>
+        </div>
+
+        <div class="trophy-badge">
+          <span class="badge-tag-top">[PHILOSOPHY TIER]</span>
+          <h3 class="badge-title">Midnight Socrates</h3>
+          <p class="badge-desc">Wrote 400 pages of deep existential poetry between 4:00 AM and 4:30 AM while questioning life choices.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>THE BHASKAR MUTHAL CHRONICLES // DEDICATED TO EVERY NIGHT OWL WARRIOR</p>
+    <p style="margin-top: 6px; font-size: 11px; color: #64748b;">
+      Deployable on Vercel | Designed for Maximum Entertainment | 100% Incognito Approved
+    </p>
+  </footer>
+
+  <script>
+    // TAB SWITCHING
+    function switchTab(tabName, el) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.nav-tab-btn').forEach(btn => btn.classList.remove('active'));
+      
+      const target = document.getElementById('tab-' + tabName);
+      if (target) {
+        target.classList.add('active');
+      }
+      if (el) {
+        el.classList.add('active');
+      }
+      playClickSound(440, 0.05);
+    }
+
+    // WEB AUDIO SOUND SYNTHESIS
+    let audioCtx = null;
+    let soundEnabled = true;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playClickSound(freq = 600, duration = 0.08) {
+      if (!soundEnabled) return;
+      try {
+        initAudio();
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const btn = event.target;
+      btn.textContent = soundEnabled ? '[SOUND: ON]' : '[SOUND: OFF]';
+    }
+
+    // MUTH-O-METER GAME LOGIC
+    let strokeCount = 0;
+    let lastStrokeTime = 0;
+    let strokeTimestamps = [];
+    let frictionHeat = 0;
+
+    const ranks = [
+      { threshold: 0, title: "RANK: NOVICE AMATEUR" },
+      { threshold: 25, title: "RANK: LOCAL ENTHUSIAST" },
+      { threshold: 60, title: "RANK: MIDNIGHT MARAUDER" },
+      { threshold: 120, title: "RANK: WRIST OF TITANIUM" },
+      { threshold: 200, title: "RANK: OLYMPIC GRIP MASTER" },
+      { threshold: 350, title: "RANK: COSMIC HAND WARRIOR" },
+      { threshold: 500, title: "RANK: BHASKAR SUPREME IMMORTAL" }
+    ];
+
+    function registerStroke() {
+      strokeCount++;
+      const now = Date.now();
+      strokeTimestamps.push(now);
+      
+      // Clean timestamps older than 5 seconds
+      strokeTimestamps = strokeTimestamps.filter(t => now - t <= 5000);
+      const rpm = Math.round((strokeTimestamps.length / 5) * 60);
+
+      frictionHeat = Math.min(100, Math.round((strokeCount / 500) * 100));
+
+      document.getElementById('clickCount').textContent = strokeCount;
+      document.getElementById('rpmCount').textContent = rpm;
+      document.getElementById('energyLevel').textContent = frictionHeat + '%';
+      document.getElementById('meterFill').style.width = Math.max(5, frictionHeat) + '%';
+
+      // Update Rank
+      let currentRank = ranks[0].title;
+      for (let r of ranks) {
+        if (strokeCount >= r.threshold) {
+          currentRank = r.title;
+        }
+      }
+      document.getElementById('rankBadge').textContent = currentRank;
+
+      // Audio feedback with rising pitch
+      const pitch = 300 + (strokeCount % 40) * 15;
+      playClickSound(pitch, 0.06);
+
+      // Button shake
+      const btn = document.getElementById('strokeBtn');
+      btn.style.transform = 'scale(0.95)';
+      setTimeout(() => btn.style.transform = 'scale(1)', 60);
+    }
+
+    function resetGame() {
+      strokeCount = 0;
+      strokeTimestamps = [];
+      frictionHeat = 0;
+      document.getElementById('clickCount').textContent = '0';
+      document.getElementById('rpmCount').textContent = '0';
+      document.getElementById('energyLevel').textContent = '0%';
+      document.getElementById('meterFill').style.width = '5%';
+      document.getElementById('rankBadge').textContent = ranks[0].title;
+      playClickSound(220, 0.1);
+    }
+
+    // GENERATOR DATA
+    const excuses = [
+      "Mom, I was practicing yoga breathing exercises and hyperventilating in complete darkness!",
+      "I heard a lizard on the curtain and I was negotiating with it using hand gestures!",
+      "My charging cable only works when I press it against the wall with my body weight!",
+      "I was praying for my upcoming semester results with intense physical devotion!",
+      "The ceiling fan had an unusual frequency noise, so I was diagnosing it with sound isolation!",
+      "I dropped my contact lens and I was crawling on the carpet for 45 minutes looking for it!",
+      "I was watching an educational tutorial on how to avoid distractions while studying!",
+      "My blanket zipper got stuck to my pajamas and I was staging a delicate rescue operation!"
+    ];
+
+    const wisdomThoughts = [
+      "Why am I chasing temporary dopamine when I could master Rust and build high-frequency trading bots?",
+      "If I spent the same amount of wrist energy writing novels, I would have won the Booker Prize by now.",
+      "The universe is 13.8 billion years old, yet here I am at 3:45 AM hiding under a bedsheet from my parents.",
+      "I am deleting all social media tomorrow morning, waking up at 5:00 AM, and reading Bhagavad Gita.",
+      "My smartphone front camera has seen things that would traumatize a forensic psychiatrist.",
+      "Is it really loneliness, or is my dopamine receptor simply asking for a 3-month sabbatical?",
+      "Tomorrow I will start going to gym and drink raw eggs. Today is the last time. (Said for the 942nd time)."
+    ];
+
+    function generateExcuse() {
+      const idx = Math.floor(Math.random() * excuses.length);
+      document.getElementById('excuseOutput').textContent = '"' + excuses[idx] + '"';
+      playClickSound(520, 0.08);
+    }
+
+    function generateWisdom() {
+      const idx = Math.floor(Math.random() * wisdomThoughts.length);
+      document.getElementById('wisdomOutput').textContent = '"' + wisdomThoughts[idx] + '"';
+      playClickSound(640, 0.08);
+    }
+  </script>
+</body>
+</html>

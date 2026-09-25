@@ -1,0 +1,12 @@
+{
+  "name": "bhaskarmuthal",
+  "version": "1.0.0",
+  "description": "The Legendary Chronicles of Bhaskar - An Entertaining Profile and Meme Showcase",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": ["bhaskar", "meme", "parody", "showcase"],
+  "author": "yasamarium",
+  "license": "MIT"
+}
