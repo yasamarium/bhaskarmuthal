@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bhaskar Ki Dastan - The Uncensored Lore</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #05070c;
+      --card-bg: #0c101a;
+      --card-hover: #131926;
+      --border: #1e293b;
+      --primary: #f59e0b;
+      --primary-glow: rgba(245, 158, 11, 0.35);
+      --accent: #06b6d4;
+      --danger: #ef4444;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-display: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-display);
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(245, 158, 11, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 70%, rgba(6, 182, 212, 0.08) 0%, transparent 45%),
+        linear-gradient(rgba(30, 41, 59, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(30, 41, 59, 0.2) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 35px 35px, 35px 35px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 7, 12, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .brand-tag {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--primary);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      color: var(--primary);
+    }
+
+    nav { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary);
+      border-color: var(--border);
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    .nav-link.btn-panic {
+      color: var(--danger);
+      border-color: var(--danger);
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 50px 20px 80px;
+    }
+
+    .page-tag {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    .page-title {
+      font-size: clamp(32px, 5vw, 54px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 30%, var(--primary) 70%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .page-lead {
+      font-size: 18px;
+      color: var(--text-muted);
+      margin-bottom: 45px;
+    }
+
+    /* CHAPTER BLOCKS */
+    .chapter {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+
+    .chapter:hover {
+      border-color: var(--primary);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .chapter::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--primary), var(--accent));
+    }
+
+    .chapter-num {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+
+    .chapter-heading {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .chapter-body {
+      font-size: 15px;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+
+    .chapter-quote {
+      margin-top: 18px;
+      padding: 14px 18px;
+      background: rgba(0, 0, 0, 0.4);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 8px 8px 0;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--primary);
+    }
+
+    /* QUOTE OF THE DAY GENERATOR */
+    .lore-interactive {
+      background: #0f1624;
+      border: 2px dashed var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .lore-quote-box {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--accent);
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 18px 0;
+    }
+
+    .btn-quote {
+      background: var(--primary);
+      color: #000;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 800;
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-quote:hover {
+      box-shadow: 0 0 20px var(--primary-glow);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 20px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="brand">
+      <span>BHASKAR</span>
+      <span class="brand-tag">MUTHAL_HQ</span>
+    </a>
+    <nav>
+      <a href="index.html" class="nav-link">[OVERVIEW]</a>
+      <a href="lore.html" class="nav-link active">[THE LORE]</a>
+      <a href="records.html" class="nav-link">[RECORDS]</a>
+      <a href="game.html" class="nav-link">[MUTH CLICKER]</a>
+      <a href="diary.html" class="nav-link">[GUPT DIARY]</a>
+      <a href="diary.html#panic" class="nav-link btn-panic">[PANIC: DAD ENTERED]</a>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <div class="page-tag">[CONFIDENTIAL BIOGRAPHY]</div>
+    <h1 class="page-title">Bhaskar Ki Dastan: The Uncensored Lore</h1>
+    <p class="page-lead">
+      Kaise ek seedha-saadha school ka ladka Google Chrome ke Incognito mode ka sabse bada dushman ban gaya. 
+      Padhiye Bhaskar ke 10 saal ke sangharsh aur right-hand mastery ki anokhi kahani.
+    </p>
+
+    <!-- CHAPTER 1 -->
+    <article class="chapter">
+      <div class="chapter-num">KAAND 01 // YEAR 2016</div>
+      <h2 class="chapter-heading">The Jio 4G Kranti & The First Strike</h2>
+      <div class="chapter-body">
+        <p>
+          Saal 2016 me jab Mukesh Ambani ne desh ko 1GB daily 4G data free diya, toh baaki bache coaching ke 
+          lectures download kar rahe the. Par Bhaskar ne dekha ek naya aasmaan. 
+          Us raat Bhaskar ne pehli baar Google par Ctrl+Shift+N dabaya. 
+          Aadhi raat ko chadar ke andar mobile ki blue light me Bhaskar ki aankhein chamak rahi thi.
+        </p>
+        <p style="margin-top: 10px;">
+          Pehli baar haath me halka sa kampan hua, par jaise hi pehla round complete hua, 
+          Bhaskar ko laga jaise usne physics ka naya niyam khoj liya ho. 
+          Us din se Bhaskar ne normal browsing chhod di aur stealth mode ko apna dharam bana liya.
+        </p>
+      </div>
+      <div class="chapter-quote">
+        "Main padhai me fail ho sakta hoon, par incognito mode me mera attendance 100% hai." — Bhaskar, Class 11th
+      </div>
+    </article>
+
+    <!-- CHAPTER 2 -->
+    <article class="chapter">
+      <div class="chapter-num">KAAND 02 // YEAR 2022</div>
+      <h2 class="chapter-heading">The Great Bluetooth Soundbar Kaand</h2>
+      <div class="chapter-body">
+        <p>
+          Yeh woh aitihasik raat thi jab Bhaskar ka career lagbhag khatam hone wala tha. 
+          Raat ke 2:45 AM ho rahe the. Ghar ke sabhi log hall me so rahe the. 
+          Bhaskar apne kamre me double kundi laga kar surgical strike par tha. 
+          Lekin galti se phone ka Bluetooth hall ke soundbar se auto-connect ho gaya!
+        </p>
+        <p style="margin-top: 10px;">
+          Sirf 1.2 second ke liye hall me aawaz goonji. Pappa uth ke khade ho gaye. 
+          Bhaskar ne cheetah ki speed se phone ka airplane mode dabaya, darwaza khola, 
+          aur pappa se bola: <em>"Pappa, lagta hai pados wale Sharma ji ka phone kisi Chinese hacker ne hijack kar liya hai, maine router firewall check kar liya hai, sab safe hai!"</em>
+          Pappa ne peeth thapthapayi aur so gaye. Bhaskar ne kamre me aakar 2 glass paani piya aur agle round par lag gaya.
+        </p>
+      </div>
+      <div class="chapter-quote">
+        "Pressure me toh sab ghabraate hain, par asli muthal wahi hai jo Bluetooth disaster ko cyber attack bana de."
+      </div>
+    </article>
+
+    <!-- CHAPTER 3 -->
+    <article class="chapter">
+      <div class="chapter-num">KAAND 03 // YEAR 2023</div>
+      <h2 class="chapter-heading">The Orthopaedic Doctor's Shock</h2>
+      <div class="chapter-body">
+        <p>
+          Ek baar Bhaskar ke right wrist me thoda sa moch aaya (over-speeding ki wajah se). 
+          Gharwale use hospital le gaye aur X-Ray karwaya. 
+          Doctor X-ray dekh ke sar pakad ke baith gaya. 
+          Doctor ne pucha: <em>"Beta, tum kabbadi khelte ho ya railway track par hathoda chalate ho? Tumhare right wrist ki bone density normal insaan se 400% zyada hai!"</em>
+        </p>
+        <p style="margin-top: 10px;">
+          Bhaskar ne sharmate hue bola: <em>"Sir, main gaming karta hoon mouse ke saath, reflexes fast hain."</em> 
+          Doctor ne vitamin ki goli di aur bola: <em>"Beta, gaming kam karo, warna tumhara haath kisi din table tod dega."</em>
+        </p>
+      </div>
+      <div class="chapter-quote">
+        "Left hand is for balance, Right hand is for breaking sound barriers." — Dr. M. K. Sharma, Orthopaedic Report
+      </div>
+    </article>
+
+    <!-- CHAPTER 4 -->
+    <article class="chapter">
+      <div class="chapter-num">KAAND 04 // YEAR 2024</div>
+      <h2 class="chapter-heading">The Winter Lotion Strategy</h2>
+      <div class="chapter-body">
+        <p>
+          Ghar me har hafte Nivea aur Vaseline ki nayi bottle khatam hone lagi. 
+          Mummy ko laga Bhaskar ko koi gambhir twacha rog (skin allergy) ho gaya hai. 
+          Mummy ne dadi maa ke gharelu nuskhe shuru kiye, par Bhaskar ne bola: 
+          <em>"Mummy, sardiyon me haathon me dry skin bohot hoti hai, moisturizer lagana hygiene ke liye zaroori hai."</em>
+        </p>
+        <p style="margin-top: 10px;">
+          Jabki sach yeh tha ki Bhaskar ne Navratna Cool Oil aur Almond Oil ka hybrid fuel banaya tha, 
+          jisse friction heat bilkul zero ho jaati thi aur continuous 4-hour performance bina overheating ke chalti thi.
+        </p>
+      </div>
+      <div class="chapter-quote">
+        "Engine chahe Ferrari ka ho ya Bhaskar ka, lubricant me kabhi compromise nahi hona chahiye."
+      </div>
+    </article>
+
+    <!-- CHAPTER 5 -->
+    <article class="chapter">
+      <div class="chapter-num">KAAND 05 // PRESENT</div>
+      <h2 class="chapter-heading">The 3-Second Snore Protocol</h2>
+      <div class="chapter-body">
+        <p>
+          Bhaskar ke room ke baahar jaise hi kisi ki chappal ghisatne ki aawaz aati hai, 
+          uske brain me military alert baj jaata hai. 
+          Sirf 0.04 millisecond me:
+        </p>
+        <ul style="padding-left: 20px; margin: 10px 0; color: var(--accent);">
+          <li>Phone display power button pressed</li>
+          <li>Phone slide karke pillow ke neeche concealed</li>
+          <li>Kambal gale tak kheench liya gaya</li>
+          <li>Aankhein band karke authentic 40Hz fake kharraate shuru</li>
+        </ul>
+        <p>
+          Jab mummy darwaza dhakel ke dekhti hain, toh Bhaskar aisi bholi soorat banakar so raha hota hai 
+          jaise usne z जिंदगी me internet ka naam bhi na suna ho.
+        </p>
+      </div>
+      <div class="chapter-quote">
+        "Kharraate aisi honi chahiye ki CID ko bhi lage ladka 6 ghante se gehri neend me hai."
+      </div>
+    </article>
+
+    <!-- INTERACTIVE QUOTE BOX -->
+    <div class="lore-interactive">
+      <div style="font-family: var(--font-mono); font-size: 13px; color: var(--primary); text-transform: uppercase;">
+        [RANDOM BHASKAR MOTIVATIONAL SHAYARI / QUOTE]
+      </div>
+      <div class="lore-quote-box" id="loreQuote">
+        "Raat jitni andheri hoti hai, Bhaskar ki screen utni hi private hoti hai."
+      </div>
+      <button class="btn-quote" onclick="newLoreQuote()">GENERATE ANOTHER SHAYARI</button>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>THE BHASKAR MUTHAL ARCHIVES // VERCEL EDITION</p>
+  </footer>
+
+  <script>
+    const shayaris = [
+      "Raat jitni andheri hoti hai, Bhaskar ki screen utni hi private hoti hai.",
+      "Jio ka recharge khatam ho sakta hai, par Bhaskar ka right hand kabhi low battery nahi hota.",
+      "Duniya kehti hai sonch badlo, Bhaskar kehta hai incognito tab badlo.",
+      "Chadar ke andar jo jung ladi jaati hai, uske medals kabhi public me nahi dikhte.",
+      "Logo ke paas gym membership hoti hai, Bhaskar ke paas wrist flexibility ka vardaan hai.",
+      "Post-nut clarity aate hi insaan sochta hai: 'Main desh ke liye kya kar raha hoon?'",
+      "Khamoshi aisi honi chahiye ki chadar ki sarsarahat bhi FBI na pakad sake."
+    ];
+
+    function newLoreQuote() {
+      const idx = Math.floor(Math.random() * shayaris.length);
+      document.getElementById('loreQuote').textContent = '"' + shayaris[idx] + '"';
+    }
+  </script>
+</body>
+</html>

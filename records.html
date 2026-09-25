@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muthal World Records & Medical Report // Bhaskar HQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #05070c;
+      --card-bg: #0c101a;
+      --card-hover: #131926;
+      --border: #1e293b;
+      --primary: #f59e0b;
+      --primary-glow: rgba(245, 158, 11, 0.35);
+      --accent: #06b6d4;
+      --danger: #ef4444;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-display: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-display);
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(245, 158, 11, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 70%, rgba(239, 68, 68, 0.08) 0%, transparent 45%),
+        linear-gradient(rgba(30, 41, 59, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(30, 41, 59, 0.2) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 35px 35px, 35px 35px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 7, 12, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .brand-tag {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--primary);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      color: var(--primary);
+    }
+
+    nav { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary);
+      border-color: var(--border);
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    .nav-link.btn-panic {
+      color: var(--danger);
+      border-color: var(--danger);
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 50px 20px 80px;
+    }
+
+    .page-tag {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--danger);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    .page-title {
+      font-size: clamp(32px, 5vw, 54px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 30%, var(--primary) 70%, var(--danger) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .page-lead {
+      font-size: 17px;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    /* CARD */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px;
+      margin-bottom: 30px;
+    }
+
+    /* TABLE */
+    .styled-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    .styled-table th, .styled-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .styled-table th {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      background: rgba(6, 182, 212, 0.06);
+    }
+
+    .styled-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .tag-gold {
+      font-family: var(--font-mono);
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    /* MEDICAL REPORT STYLING */
+    .medical-report {
+      background: #090e18;
+      border: 2px solid rgba(6, 182, 212, 0.4);
+      border-radius: 16px;
+      padding: 28px;
+      font-family: var(--font-mono);
+      margin-bottom: 35px;
+      position: relative;
+    }
+
+    .medical-header {
+      border-bottom: 1px dashed var(--accent);
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .medical-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .medical-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 18px;
+      font-size: 13px;
+    }
+
+    .medical-item-label { color: var(--text-muted); font-size: 11px; text-transform: uppercase; }
+    .medical-item-val { color: var(--text); font-weight: 700; margin-top: 2px; }
+
+    .medical-diagnosis {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #fca5a5;
+    }
+
+    /* LEADERBOARD */
+    .rank-badge {
+      display: inline-block;
+      width: 26px;
+      height: 26px;
+      line-height: 26px;
+      text-align: center;
+      border-radius: 50%;
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .rank-1 { background: var(--primary); color: #000; box-shadow: 0 0 10px var(--primary); }
+    .rank-2 { background: #94a3b8; color: #000; }
+    .rank-3 { background: #b45309; color: #fff; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 20px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="brand">
+      <span>BHASKAR</span>
+      <span class="brand-tag">MUTHAL_HQ</span>
+    </a>
+    <nav>
+      <a href="index.html" class="nav-link">[OVERVIEW]</a>
+      <a href="lore.html" class="nav-link">[THE LORE]</a>
+      <a href="records.html" class="nav-link active">[RECORDS]</a>
+      <a href="game.html" class="nav-link">[MUTH CLICKER]</a>
+      <a href="diary.html" class="nav-link">[GUPT DIARY]</a>
+      <a href="diary.html#panic" class="nav-link btn-panic">[PANIC: DAD ENTERED]</a>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <div class="page-tag">[OFFICIAL AUDIT & VERIFICATION]</div>
+    <h1 class="page-title">Guinness Muthal Records & Medical Dossier</h1>
+    <p class="page-lead">
+      Documented proof of Bhaskar's biological supremacy, unbroken endurance records, and the confidential clinical diagnosis report.
+    </p>
+
+    <!-- MEDICAL REPORT -->
+    <div class="medical-report">
+      <div class="medical-header">
+        <span class="medical-title">[AIIMS ORTHOPAEDIC CLINICAL DOSSIER // TOP SECRET]</span>
+        <span style="color: var(--danger); font-size: 12px;">[PATIENT: BHASKAR // AGE: 22]</span>
+      </div>
+
+      <div class="medical-grid">
+        <div>
+          <div class="medical-item-label">Right Wrist Bone Density</div>
+          <div class="medical-item-val" style="color: var(--accent);">+420% (Titanium Grade)</div>
+        </div>
+        <div>
+          <div class="medical-item-label">Left Wrist Bone Density</div>
+          <div class="medical-item-val" style="color: var(--text-muted);">Normal Human (Papad Level)</div>
+        </div>
+        <div>
+          <div class="medical-item-label">Right Forearm Grip Strength</div>
+          <div class="medical-item-val" style="color: var(--primary);">94.8 kg / cm2 (Hydraulic)</div>
+        </div>
+        <div>
+          <div class="medical-item-label">Blink Frequency During Session</div>
+          <div class="medical-item-val" style="color: var(--danger);">0 Blinks / 45 Minutes</div>
+        </div>
+      </div>
+
+      <div class="medical-diagnosis">
+        <strong>DOCTOR'S VERDICT:</strong> "Patient exhibits hyper-developed flexor carpi radialis in the right arm only. 
+        When asked if he chops firewood for a living, patient claimed he only plays Subway Surfers. 
+        Recommended treatment: Switch to left hand immediately for bilateral body symmetry, otherwise patient's right arm will rip his shirt sleeves by next Diwali."
+      </div>
+    </div>
+
+    <!-- CERTIFIED WORLD RECORDS TABLE -->
+    <div class="card" style="padding: 0; overflow-x: auto;">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>CHALLENGE / RECORD</th>
+            <th>BHASKAR'S OFFICIAL RECORD</th>
+            <th>ORDINARY CITIZEN</th>
+            <th>VERIFICATION STATUS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Longest Single Session</strong></td>
+            <td><span class="tag-gold">8 Hours 42 Mins (Single Stretch)</span></td>
+            <td>18 Minutes</td>
+            <td>[CONFIRMED BY JIO TOWER]</td>
+          </tr>
+          <tr>
+            <td><strong>Alt+Tab Panic Window Switch</strong></td>
+            <td><span class="tag-gold">0.038 Milliseconds</span></td>
+            <td>1.5 Seconds (Gets caught)</td>
+            <td>[FASTER THAN LIGHT]</td>
+          </tr>
+          <tr>
+            <td><strong>Simultaneous Open Incognito Tabs</strong></td>
+            <td><span class="tag-gold">128 Tabs (Google Chrome Survives)</span></td>
+            <td>8 Tabs (Phone freezes)</td>
+            <td>[RAM OBLITERATED]</td>
+          </tr>
+          <tr>
+            <td><strong>Peak Lockdown Daily Endurance</strong></td>
+            <td><span class="tag-gold">11 Rounds in 24 Hours</span></td>
+            <td>2 Rounds max</td>
+            <td>[BIOLOGICAL ANOMALY]</td>
+          </tr>
+          <tr>
+            <td><strong>Volume Down to 0% Speed</strong></td>
+            <td><span class="tag-gold">0.012 Seconds</span></td>
+            <td>0.8 Seconds (Family hears intro)</td>
+            <td>[MILITARY GRADE]</td>
+          </tr>
+          <tr>
+            <td><strong>Fake Snore Transition Time</strong></td>
+            <td><span class="tag-gold">0.04 Seconds</span></td>
+            <td>5 Seconds (Stutters)</td>
+            <td>[OSCAR WINNER]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- LEADERBOARD -->
+    <h2 style="font-size: 24px; font-weight: 800; margin: 40px 0 16px;">National Desi Muthal Leaderboard</h2>
+    <div class="card" style="padding: 0; overflow-x: auto;">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>RANK</th>
+            <th>WARRIOR ALIAS</th>
+            <th>SPECIALTY MOVE</th>
+            <th>ENDURANCE SCORE</th>
+            <th>TIER</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background: rgba(245, 158, 11, 0.08);">
+            <td><span class="rank-badge rank-1">1</span></td>
+            <td><strong>Bhaskar (The Final Boss)</strong></td>
+            <td>The 0.04s Snore Reflex + Navratna Fuel</td>
+            <td><strong style="color: var(--primary);">99,999 PTS</strong></td>
+            <td>[GODFATHER TIER]</td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-2">2</span></td>
+            <td>Bunty 5G (Noida Sector 62)</td>
+            <td>Fiber Optic Night Pack Drainer</td>
+            <td>78,400 PTS</td>
+            <td>[VETERAN]</td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-3">3</span></td>
+            <td>Ramesh Bluetooth (Patna)</td>
+            <td>Single Earbud Radar Specialist</td>
+            <td>64,120 PTS</td>
+            <td>[VETERAN]</td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge">4</span></td>
+            <td>Pappu 2-Minute (Bhopal)</td>
+            <td>Speedrun Any% Category</td>
+            <td>32,050 PTS</td>
+            <td>[AMATEUR]</td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge">5</span></td>
+            <td>Golu Incognito (Kanpur)</td>
+            <td>Decoy Wikipedia Tab Master</td>
+            <td>29,800 PTS</td>
+            <td>[AMATEUR]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>BHASKAR WORLD RECORDS AUDIT // DEPLOYABLE TO VERCEL</p>
+  </footer>
+
+</body>
+</html>
